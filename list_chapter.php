@@ -1,6 +1,6 @@
 <?php
 
-include_once  "chapter_handler.php";
+include_once "chapter_handler.php";
 
 $data = load_chapter();
 
