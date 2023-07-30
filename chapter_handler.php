@@ -44,21 +44,18 @@ function load_chapter(): array {
 	}
 
 	$sql = "SELECT chapter_id, chapter_name, chapter_name_extend, chapter_slug, date FROM wp_manga_chapters 
-			WHERE post_id=" . $post_id . " order by chapter_index DESC";
+			WHERE post_id=" . $post_id . " order by chapter_id DESC";
 	$result = $db->conn->query($sql);
 
 	if ($result) {
-		// Initialize an array to store the data
 		$data = array();
 
-		// Process the data
 		while ($chapter = $result->fetch_assoc()) {
 			$chapter['link'] = $base_url . $chapter['chapter_slug'] . "/";
 			$chapter['full_name'] = get_name( $chapter );
 			$data[] = $chapter;
 		}
 
-		// Free the result set
 		$result->free();
 
 		return $data;
