@@ -17,18 +17,20 @@ ob_start();
         <div class="listing-chapters_wrap cols-1 show-more">
             <?php if ( $data ) : ?>
                 <ul class="main version-chap no-volumn">
-		            <?php foreach ($data as $chapter): ?>
+		            <?php foreach ($data as $chapter) {
+			            $time_diff = get_time_diff( $chapter['date'] );
+                    ?>
                         <li class="wp-manga-chapter">
                             <a href="<?php echo $chapter['link']; ?>">
 					            <?php echo $chapter['full_name']; ?>
                             </a>
-<!--	                        --><?php //if ( $time_diff ) { ?>
-<!--                                <span class="chapter-release-date">-->
-<!--										--><?php //echo wp_kses_post( $time_diff ); ?>
-<!--									</span>-->
-<!--	                        --><?php //} ?>
+	                        <?php if ( $time_diff ) { ?>
+                                <span class="chapter-release-date">
+										<?php echo $time_diff; ?>
+									</span>
+	                        <?php } ?>
                         </li>
-		            <?php endforeach; ?>
+		            <?php } ?>
                 </ul>
             <?php else : ?>
 	            <?php echo 'Novel has no chapter yet.'; ?>

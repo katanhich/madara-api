@@ -37,8 +37,13 @@ function get_name( $chapter ) {
 function load_chapter(): array {
 	global $db;
 
+	if (!isset($_POST['manga_id']) || !isset($_POST['base_url'])) {
+		return [];
+	}
+
 	$post_id = $_POST['manga_id'];
 	$base_url = $_POST['base_url'];
+
 	if (substr($base_url, -1) !== '/') {
 		$base_url = $base_url . "/";
 	}
@@ -62,4 +67,19 @@ function load_chapter(): array {
 	} else {
 		return [];
 	}
+}
+
+function get_time_diff( $time, $timestamp = false ) {
+//	echo $time;
+//	$check   = ! $timestamp ? strtotime( $time ) : $time;
+//	$current = my_current_time( 'timestamp' );
+//
+//	if ( $current > $check + 259200 ) {
+//		$diff = date( 'F j, Y', strtotime($time) );
+//	} else {
+//		$diff = sprintf( '%s ago', human_time_diff( $check, $current ) );
+//	}
+//
+//	return $diff;
+	return date( 'F j, Y', strtotime( $time ) );
 }

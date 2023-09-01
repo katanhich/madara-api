@@ -16,12 +16,18 @@ function slugify_text( $text ): string {
 /**
  * @throws Exception
  */
-function my_current_time( $type, $gmt = 0 ): string {
+function my_current_time( $type, $gmt = 1 ): string {
+	if ( 'timestamp' === $type || 'U' === $type ) {
+		return time();
+	}
+
 	if ( 'mysql' === $type ) {
 		$type = 'Y-m-d H:i:s';
 	}
 
-	$timezone = $gmt ? new DateTimeZone( 'UTC' ) : new DateTimeZone( '-07:00' ) ;
+//	$timezone = $gmt ? new DateTimeZone( 'UTC' ) : new DateTimeZone( '-07:00' ) ;
+	// always use gmt
+	$timezone = new DateTimeZone( 'UTC' );
 	$datetime = new DateTime( 'now', $timezone );
 
 	return $datetime->format( $type );
