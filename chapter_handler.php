@@ -70,16 +70,15 @@ function load_chapter(): array {
 }
 
 function get_time_diff( $time, $timestamp = false ) {
-//	echo $time;
-//	$check   = ! $timestamp ? strtotime( $time ) : $time;
-//	$current = my_current_time( 'timestamp' );
-//
-//	if ( $current > $check + 259200 ) {
-//		$diff = date( 'F j, Y', strtotime($time) );
-//	} else {
-//		$diff = sprintf( '%s ago', human_time_diff( $check, $current ) );
-//	}
-//
-//	return $diff;
-	return date( 'F j, Y', strtotime( $time ) );
+	$check   = ! $timestamp ? strtotime( $time ) : $time;
+	$current = my_current_time( 'timestamp' );
+
+	if ( $current > $check + 259200 ) {
+		$diff = date( 'F j, Y', strtotime($time) );
+	} else {
+		$diff = sprintf( '%s ago', human_time_diff( $check, $current ) );
+	}
+
+	return $diff;
+//	return date( 'F j, Y', strtotime( $time ) );
 }
